@@ -10,116 +10,128 @@ Aritra Dutta (aritrad@andrew.cmu.edu)
 
 Sakhi Khanchandani (skhancha@andrew.cmu.edu)
 
-1. Title
+📖 Overview
 
-Predicting COVID-19 Vaccine Uptake and Test Positivity Rate Using Behavioral and Belief Indicators
+Forecast county-level COVID-19 vaccination coverage and 14-day test positivity rates using supervised regression models built on behavioral and belief indicators from the CMU Delphi CTIS Facebook survey.
 
-2. Introduction
+📂 Project Structure
 
-This project develops supervised regression models to forecast county-level COVID-19 vaccination coverage and 14-day test positivity rates. By leveraging behavioral and belief indicators from a large-scale survey, the models enable targeted interventions, optimized resource allocation, and improved outbreak control strategies.
+├── MLPS_Project_Covid_Predictions.ipynb    # Exploration, modeling & visualization
+├── covidcast_new-2.csv                    # Raw CTIS data (county-day records)
+├── df_pos_imputed.csv                     # Preprocessed positivity dataset
+├── requirements.txt                       # Python package list
+└── README.md                              # This file
 
-3. Dataset
+🗄️ Dataset
 
-Source: CMU Delphi COVID-19 Trends and Impact Survey (CTIS) via Facebook
+Source: CMU Delphi CTIS via Facebook
 
-Period: January 7–February 12, 2021
+Timeframe: Jan 7 – Feb 12, 2021
 
 Records: 25,627 county-day observations
 
 Features:
 
-COVID activity (symptoms, test results, vaccination status)
+COVID activity: symptoms, test results, vaccination status
 
-Behavioral (mask usage, mobility patterns)
+Behavioral: mask usage, mobility patterns
 
-Belief (vaccine confidence in various institutions)
+Belief: vaccine confidence in WHO, government, peers
 
 Targets:
 
-smoothed_wcovid_vaccinated (vaccination percentage)
+smoothed_wcovid_vaccinated (vaccination %)
 
-smoothed_wtested_positive_14d (14-day test positivity rate)
+smoothed_wtested_positive_14d (14‑day test positivity)
 
-4. Data Analysis
+🔍 Data Analysis
 
-Cleaning & Imputation:
+Cleaning & Imputation
 
-Removed records with excessive missing values,
+Dropped records with >80% missing positivity data
 
-Applied mean imputation for remaining gaps.
+Mean-imputed remaining gaps (< 20%)
 
-Correlation Analysis:
+Correlation & Feature Selection
 
-Identified multicollinearity among predictors,
+Detected multicollinearity among predictors (ρ > 0.85)
 
-Selected four top features for reduced experiments.
+Selected top 4 predictors for reduced-feature experiments
 
-5. Methods & Modeling
+🛠️ Modeling Approach
 
-Baseline: Ordinary least squares regression with 5-fold cross-validation.
+Step
 
-Model Suite: Ridge, Lasso, Random Forest, K-Nearest Neighbors, and Multi-Layer Perceptron.
+Details
 
-Reduced-Feature Models: Experiments using top-four predictors.
+Baseline
 
-Evaluation Metrics: R², RMSE, and MAE on both cross-validation and holdout test sets.
+OLS Regression with 5‑fold CV, standard scaling, mean imputation
 
-6. Key Results
+Algorithms
 
-Best performance achieved by K-Nearest Neighbors: R² ≈ 0.90 for vaccination and R² ≈ 0.905 for positivity using full feature sets.
+Ridge, Lasso, Random Forest, KNN, MLP
 
-Reduced-feature KNN models still delivered strong results: R² ≈ 0.67 (vaccination) and R² ≈ 0.87 (positivity).
+Reduced-Feature Try‑out
 
-Negative correlation between predicted uptake and positivity (r ≈ –0.72) underscores vaccination’s protective effect.
+Top 4 predictors per target
 
-7. Project Structure
+Metrics
 
-├── MLPS_Project_Covid_Predictions.ipynb    # Notebook with EDA, modeling, and visualizations
-├── covidcast_new-2.csv                    # Raw CTIS survey data
-├── df_pos_imputed.csv                     # Preprocessed dataset for positivity modeling
-├── requirements.txt                       # Python dependencies
-└── README.md                              # Project overview and instructions
+R², RMSE, MAE (cross‑validation & test set)
 
-8. Setup Instructions
+Reusable pipelines: modeling() and modeling_with_4features() for consistency.
 
-Clone the repository:
+📈 Key Findings
+
+KNN (full features):
+
+Vaccination: R² ≈ 0.90
+
+Positivity: R² ≈ 0.905
+
+KNN (top 4 features):
+
+Vaccination: R² ≈ 0.67
+
+Positivity: R² ≈ 0.87
+
+Insight: Strong negative correlation (ρ ≈ –0.72) between predicted uptake and positivity confirms vaccination’s protective effect.
+
+🚀 Setup & Usage
+
+Clone repository
 
 git clone https://github.com/<username>/covid-predictions.git
 cd covid-predictions
 
-Install dependencies:
+Install dependencies
 
 python3 -m venv venv
-source venv/bin/activate       # macOS/Linux
-venv\Scripts\activate        # Windows
+source venv/bin/activate        # macOS/Linux
+venv\\Scripts\\activate       # Windows
 pip install -r requirements.txt
 
-Add data files (covidcast_new-2.csv, df_pos_imputed.csv) to the project root.
+Add dataPlace covidcast_new-2.csv and df_pos_imputed.csv in the project root.
 
-Launch Jupyter Notebook:
+Run notebook
 
 jupyter notebook MLPS_Project_Covid_Predictions.ipynb
 
-9. Requirements
+⚙️ Requirements
 
-Python 3.7 or higher
+Python: ≥ 3.7
 
-pandas
-
-numpy
-
-matplotlib
-
-seaborn
-
-scikit-learn
-
-scipy
-
-Install all dependencies with:
+Libraries: pandas, numpy, matplotlib, seaborn, scikit-learn, scipy
 
 pip install -r requirements.txt
 
-10. License
+📃 License
 
-This project is released under the MIT License. See LICENSE for details.
+Released under the MIT License.
+
+🤝 Contributing
+
+Contributions welcome! Please open issues or submit pull requests to improve models, docs, or visualizations.
+
+

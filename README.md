@@ -1,86 +1,108 @@
 Predicting COVID-19 Vaccine Uptake and Test Positivity Rate
 
-This repository contains a Jupyter Notebook (MLPS_Project_Covid_Predictions.ipynb) that explores, models, and visualizes county-level forecasts of COVID-19 vaccination coverage and 14-day test positivity rates using supervised regression techniques.
+Authors:
 
-📋 Project Structure
+Yash Sivramkrishnan (ysivramk@andrew.cmu.edu)
 
-├── MLPS_Project_Covid_Predictions.ipynb  # Main analysis and modeling notebook
-├── covidcast_new-2.csv                  # Raw CTIS survey data (county-day records)
-├── df_pos_imputed.csv                   # Preprocessed dataset for positivity modeling
-├── requirements.txt                     # Python dependencies
-└── README.md                            # Project overview and instructions
+Sachi Shah (sachipas@andrew.cmu.edu)
 
-🔍 Dataset
+Aritra Dutta (aritrad@andrew.cmu.edu)
+
+Sakhi Khanchandani (skhancha@andrew.cmu.edu)
+
+1. Title
+
+Predicting COVID-19 Vaccine Uptake and Test Positivity Rate Using Behavioral and Belief Indicators
+
+2. Introduction
+
+This project develops supervised regression models to forecast county-level COVID-19 vaccination coverage and 14-day test positivity rates. By leveraging behavioral and belief indicators from a large-scale survey, the models enable targeted interventions, optimized resource allocation, and improved outbreak control strategies.
+
+3. Dataset
 
 Source: CMU Delphi COVID-19 Trends and Impact Survey (CTIS) via Facebook
 
-Dates: January 7 – February 12, 2021
+Period: January 7–February 12, 2021
 
 Records: 25,627 county-day observations
 
 Features:
 
-smoothed_wcovid_vaccinated (target: vaccination %)
+COVID activity (symptoms, test results, vaccination status)
 
-smoothed_wtested_positive_14d (target: test positivity rate)
+Behavioral (mask usage, mobility patterns)
 
-Multiple behavioral and belief indicators (mask usage, mobility, vaccine confidence, etc.)
+Belief (vaccine confidence in various institutions)
 
-🚀 Getting Started
+Targets:
 
-1. Clone this repository
+smoothed_wcovid_vaccinated (vaccination percentage)
 
-git clone https://github.com/<your-username>/covid-predictions.git
+smoothed_wtested_positive_14d (14-day test positivity rate)
+
+4. Data Analysis
+
+Cleaning & Imputation:
+
+Removed records with excessive missing values,
+
+Applied mean imputation for remaining gaps.
+
+Correlation Analysis:
+
+Identified multicollinearity among predictors,
+
+Selected four top features for reduced experiments.
+
+5. Methods & Modeling
+
+Baseline: Ordinary least squares regression with 5-fold cross-validation.
+
+Model Suite: Ridge, Lasso, Random Forest, K-Nearest Neighbors, and Multi-Layer Perceptron.
+
+Reduced-Feature Models: Experiments using top-four predictors.
+
+Evaluation Metrics: R², RMSE, and MAE on both cross-validation and holdout test sets.
+
+6. Key Results
+
+Best performance achieved by K-Nearest Neighbors: R² ≈ 0.90 for vaccination and R² ≈ 0.905 for positivity using full feature sets.
+
+Reduced-feature KNN models still delivered strong results: R² ≈ 0.67 (vaccination) and R² ≈ 0.87 (positivity).
+
+Negative correlation between predicted uptake and positivity (r ≈ –0.72) underscores vaccination’s protective effect.
+
+7. Project Structure
+
+├── MLPS_Project_Covid_Predictions.ipynb    # Notebook with EDA, modeling, and visualizations
+├── covidcast_new-2.csv                    # Raw CTIS survey data
+├── df_pos_imputed.csv                     # Preprocessed dataset for positivity modeling
+├── requirements.txt                       # Python dependencies
+└── README.md                              # Project overview and instructions
+
+8. Setup Instructions
+
+Clone the repository:
+
+git clone https://github.com/<username>/covid-predictions.git
 cd covid-predictions
 
-2. Create a virtual environment and install dependencies
+Install dependencies:
 
 python3 -m venv venv
 source venv/bin/activate       # macOS/Linux
 venv\Scripts\activate        # Windows
 pip install -r requirements.txt
 
-3. Place the data files
+Add data files (covidcast_new-2.csv, df_pos_imputed.csv) to the project root.
 
-Download or move covidcast_new-2.csv and df_pos_imputed.csv into the project root.
-
-4. Launch Jupyter Notebook
+Launch Jupyter Notebook:
 
 jupyter notebook MLPS_Project_Covid_Predictions.ipynb
 
-🖥 Notebook Overview
+9. Requirements
 
-EDA
-
-Data exploration, summary statistics, missing-value imputation, and correlation analysis.
-
-Model Building
-
-Definition of a reusable modeling() function to train and compare multiple regressors (Linear Regression, Ridge, Lasso, Random Forest, etc.).
-
-Visualization of Actual vs. Predicted values and selection of the best-performing model.
-
-Targeted Model
-
-modeling_with_4features() for streamlined forecasting using a subset of four key predictors.
-
-Evaluation
-
-Calculation of R², RMSE, and MAE for each model.
-
-Scatter plots and Pearson correlation between predicted vaccination uptake and test positivity.
-
-📊 Results
-
-High-accuracy forecasts of vaccination coverage and test positivity across U.S. counties.
-
-Visual diagnostics (Actual vs. Predicted) saved as PNGs in the project directory.
-
-Insights to inform resource allocation and targeted public health interventions.
-
-⚙️ Requirements
-
-Python 3.7+
+Python 3.7 or higher
 
 pandas
 
@@ -94,14 +116,10 @@ scikit-learn
 
 scipy
 
-You can install all dependencies via: pip install -r requirements.txt
+Install all dependencies with:
 
-📝 License
+pip install -r requirements.txt
+
+10. License
 
 This project is released under the MIT License. See LICENSE for details.
-
-🤝 Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request with improvements or new features.
-
-Created by Sakhi Khanchandani, MISM candidate at Carnegie Mellon University.

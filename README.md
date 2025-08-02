@@ -1,15 +1,5 @@
 Predicting COVID-19 Vaccine Uptake and Test Positivity Rate
 
-Authors:
-
-Yash Sivramkrishnan (ysivramk@andrew.cmu.edu)
-
-Sachi Shah (sachipas@andrew.cmu.edu)
-
-Aritra Dutta (aritrad@andrew.cmu.edu)
-
-Sakhi Khanchandani (skhancha@andrew.cmu.edu)
-
 📖 Overview
 
 Forecast county-level COVID-19 vaccination coverage and 14-day test positivity rates using supervised regression models built on behavioral and belief indicators from the CMU Delphi CTIS Facebook survey.
